@@ -1,0 +1,1 @@
+%SystemRoot%\explorer.exe "\\fpxmty2\sys1\Deptos\D350\JDCP Mexico"
