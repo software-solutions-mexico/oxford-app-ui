@@ -1,2 +1,19 @@
-<h4>Bienvenido: {{user.email}}</h4>
-{{login_error}}
+<div class="container">
+    <div class="row pt-5" style="justify-content:center;" id="file_loader">
+        <!-- Grid column -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center default-text py-3"><i class="fa fa-lock"></i> Carga XLS</h3>
+                    <!--Body-->
+                    <form enctype="multipart/form-data" action="handler/import_data_from_excel" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden">
+                        <div class="md-form">
+                            <input class="form-control" type="file">
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
