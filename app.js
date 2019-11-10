@@ -9,6 +9,7 @@ angular.module("main").controller("mainController", function ($scope, $http) {
     $scope.user_email = sessionStorage.getItem("user_email");
     $scope.token = sessionStorage.getItem("token");
     $scope.main = 'views/home.html';
+    $scope.upload_state = "";
 
     $scope.login = function (user, password) {
         $http({
@@ -32,8 +33,74 @@ angular.module("main").controller("mainController", function ($scope, $http) {
     $scope.logout = function () {
         $scope.token = "";
         sessionStorage.setItem("token", "");
-        console.log("FROM LOGoUT");
     };
+
+
+    // "https://oxford-app-api.herokuapp.com/v1/notifications/create_notifications_from_excel"
+    $scope.uploadFile = function(files) {
+        var fd = new FormData();
+        var files = document.getElementById('file').files[0];
+        fd.append('file',files);
+
+        $http({
+            url: "http://localhost:3000/v1/notifications/create_notifications_from_excel",
+            method: "POST",
+            data: fd,
+            headers: {
+                'Content-Type': undefined,
+                'Authorization': $scope.token
+            },
+        })
+            .then(function (response) {
+                console.log("SUCCESS UPLOAD")
+                if (response.data.errors) {
+                    $scope.upload_state = "Usuarios no encontrados para entregar notificaciones"
+                }
+                else {
+                    $scope.upload_state = "Notificaciones creadas exitosamente";
+                }
+
+            }, function (response) {
+                console.log("ERROR")
+                $scope.upload_state = "Error en la subida de archivo"
+            });
+        return;
+    };
+
+    // $scope.uploadFile = function(file) {
+    //     var fd = new FormData();
+    //     fd.append('file', file);
+    //
+    //     $https:.post("http://localhost:3000/v1/notifications/create_notifications_from_excel", fd, {
+    //         transformRequest: angular.identity,
+    //         headers: {'Content-Type': "application/json",
+    //                         'Authorization': $scope.token
+    //         }
+    //     })
+    //         .success(function() {
+    //         })
+    //         .error(function() {
+    //         });
+    // }
+
+
+    // $scope.uploadFile = function(files) {
+    //     var fd = new FormData();
+    //     //Take the first selected file
+    //     fd.append("file", files[0]);
+    //     $http.post("http://localhost:3000/v1/notifications/create_notifications_from_excel", fd, {
+    //         headers: {
+    //             'Content-Type': "application/json",
+    //             'Authorization': $scope.token
+    //         },
+    //         transformRequest: angular.identity
+    //     }).then(function (response) {
+    //         console.log("SUCCESS UPLOAD")
+    //     }, function (response) {
+    //         console.log("ERROR")
+    //     });
+    //     return;
+    // };
 
     // $scope.login($scope.username, $scope.password);
 
