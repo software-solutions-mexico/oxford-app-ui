@@ -36,14 +36,14 @@ angular.module("main").controller("mainController", function ($scope, $http) {
     };
 
 
-    // "https://oxford-app-api.herokuapp.com/v1/notifications/create_notifications_from_excel"
+    // dev url: http://localhost:3000/v1/notifications/create_notifications_from_excel
     $scope.uploadFile = function(files) {
         var fd = new FormData();
         var files = document.getElementById('file').files[0];
         fd.append('file',files);
 
         $http({
-            url: "http://localhost:3000/v1/notifications/create_notifications_from_excel",
+            url: "https://oxford-app-api.herokuapp.com/v1/notifications/create_notifications_from_excel",
             method: "POST",
             data: fd,
             headers: {
