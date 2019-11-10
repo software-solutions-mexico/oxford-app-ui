@@ -33,6 +33,7 @@ angular.module("main").controller("mainController", function ($scope, $http) {
     $scope.logout = function () {
         $scope.token = "";
         sessionStorage.setItem("token", "");
+        $scope.upload_state = "";
     };
 
 
@@ -67,41 +68,5 @@ angular.module("main").controller("mainController", function ($scope, $http) {
         return;
     };
 
-    // $scope.uploadFile = function(file) {
-    //     var fd = new FormData();
-    //     fd.append('file', file);
-    //
-    //     $https:.post("http://localhost:3000/v1/notifications/create_notifications_from_excel", fd, {
-    //         transformRequest: angular.identity,
-    //         headers: {'Content-Type': "application/json",
-    //                         'Authorization': $scope.token
-    //         }
-    //     })
-    //         .success(function() {
-    //         })
-    //         .error(function() {
-    //         });
-    // }
-
-
-    // $scope.uploadFile = function(files) {
-    //     var fd = new FormData();
-    //     //Take the first selected file
-    //     fd.append("file", files[0]);
-    //     $http.post("http://localhost:3000/v1/notifications/create_notifications_from_excel", fd, {
-    //         headers: {
-    //             'Content-Type': "application/json",
-    //             'Authorization': $scope.token
-    //         },
-    //         transformRequest: angular.identity
-    //     }).then(function (response) {
-    //         console.log("SUCCESS UPLOAD")
-    //     }, function (response) {
-    //         console.log("ERROR")
-    //     });
-    //     return;
-    // };
-
-    // $scope.login($scope.username, $scope.password);
 
 });
